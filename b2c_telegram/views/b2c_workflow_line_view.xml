@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+    <record id="view_b2c_workflow_line_form_telegram" model="ir.ui.view">
+        <field name="name">view.b2c.workflow.line.telegra.form</field>
+        <field name="model">b2c.workflow.line</field>
+        <field name="inherit_id" ref="b2c_base.view_b2c_workflow_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="before">
+                <field attrs="{'invisible': [('telegram_action', '!=', 'image')]}" class="oe_avatar" name="image" nolabel="1" options="{&quot;preview_image&quot;:&quot;image&quot;}" widget="image"/>
+            </xpath>
+            <xpath expr="//field[@name='model_id']" position="before">
+                <field name="telegram_action"/>
+                <field name="element_keyboard" attrs="{'invisible': [('telegram_action', '!=', 'selection')]}"/>
+                <field name="send_location" attrs="{'invisible': [('telegram_action', '!=', 'texts')]}"></field>
+                <field name="send_contact" attrs="{'invisible': ['|', ('telegram_action', '!=', 'texts'), ('send_location', '=', True)]}"></field>
+                <field name="text_in_chat" attrs="{'invisible': ['|', ('telegram_action', 'not in', ['image', 'attachment', 'video', 'audio']), ('action', '!=', 'code')]}"></field>
+            </xpath>
+            <xpath expr="//field[@name='attachment']" position="attributes">
+                <attribute name="attrs">{'invisible': [('telegram_action', 'not in', ['attachment', 'video', 'audio'])]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -8,9 +8,10 @@ import psycopg2
 from odoo import sql_db
 from odoo.service import db, server
 from odoo.tools import config
-from telegram.ext import CommandHandler, Updater
+from telegram.ext import *
 
-from . import b2c_base, b2c_bot
+from . import b2c_base, b2c_bot, b2c_chat
+from . import b2c_workflow
 from .b2c_bot import B2CBotTelegram
 
 _logger = logging.getLogger(__name__)
